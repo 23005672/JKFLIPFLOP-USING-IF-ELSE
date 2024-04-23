@@ -48,31 +48,34 @@ RegisterNumber: 212223240141
 */
 ```
 ```
-module jk_ff(q,qb,j,k,clock,reset);
-input j,k,clock, reset;
-output reg q,qb;
-
-always@(posedge(clock))
-
-begin
-    if(reset)
-	   begin 
-		  q <= q;
-		  qb <= qb;
-		  end
-	else
-		  begin
-		    if(j != k)
-			 begin 
-			   q <= j;
-				qb <= k;
-				end
-			else if(j == 1 && k == 1)	
-			  begin
-			    q <= 1'bz;
-				 qb <= 1'bz;
-				end
-		 end
+module Exp_07(q,qb,j,k,clock,reset);
+	input j,k,clock,reset;
+	output reg q,qb;
+always @(posedge (clock))
+	begin
+		if(!reset)
+			begin
+				q <= q;
+				qb <= qb;
+			end
+		else
+			begin
+				if(j == 0 && k == 0)
+					begin
+					q <= q;
+					qb <= qb;
+					end
+				else if (j != k)
+					begin
+					q <= j;
+					qb <= k;
+					end
+				else if (j ==1 && k == 1)
+					begin 
+					q <= ~q;
+					qb <= ~qb;
+					end
+			end
 	end
 endmodule
 */
@@ -81,7 +84,7 @@ endmodule
 ![Screenshot 2024-04-16 213853](https://github.com/23005672/JKFLIPFLOP-USING-IF-ELSE/assets/138971519/cc422ce5-9284-46ce-8183-630ad3c3d8b2)
 
 ### TIMING DIGRAMS FOR FLIP FLOPS:
-![Screenshot (67)](https://github.com/23005672/JKFLIPFLOP-USING-IF-ELSE/assets/138971519/064da0f7-6617-44d5-b719-42135abdc582)
+![Screenshot 2024-04-23 101428](https://github.com/23005672/JKFLIPFLOP-USING-IF-ELSE/assets/138971519/6b033649-a4c6-4a05-9025-9d74cda8f000)
 
 ### RESULTS:
 Implementation of JK flipflop using verilog and validating their functionality using their functional tables is executed and the output is verified successfully.
